@@ -1,0 +1,11 @@
+.hide::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.watchListBtn {
+  @apply rounded-sm border-2 border-red-700 py-1 px-8 mb-4 shadow-sm bg-gray-dark  text-white relative hover:border-green-300;
+}
