@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "firebase": "^8.6.2",
     "react": "^17.0.2",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "^17.0.2",
@@ -21,7 +22,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && echo '/* /index.html 200' | cat >build/_redirects ",
     "test": "craco test",
     "eject": "react-scripts eject",
     "dev": "TAILWIND_MODE=watch NODE_ENV=development postcss tailwind.css -o ./dist/tailwind.css -w",
