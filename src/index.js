@@ -7,5 +7,5 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import axios from 'axios';
-axios.defaults.baseURL = 'https://api.themoviedb.org/3/movie/';
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 ReactDOM.render(<BrowserRouter><App/></BrowserRouter>,document.getElementById('root'));

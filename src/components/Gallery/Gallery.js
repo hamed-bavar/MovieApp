@@ -11,7 +11,7 @@ const Gallery = () => {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        `${id}/images?api_key=c46e93100eb64667d419552d00b518d6&language=null`
+        `movie/${id}/images?api_key=c46e93100eb64667d419552d00b518d6&language=null`
       );
       setData(res.data.backdrops);
     })();

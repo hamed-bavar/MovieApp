@@ -10,9 +10,8 @@ import Card from '../../components/Card/Card'
 const fetchMovies = async (params) => {
   if (!params.pageParam) params.pageParam = 1;
   let category = params.queryKey[1][0];
-
   const res = await axios.get(
-    `${category}?api_key=c46e93100eb64667d419552d00b518d6&language=en-US&page=${params.pageParam}`
+    `movie/${category}?api_key=c46e93100eb64667d419552d00b518d6&language=en-US&page=${params.pageParam}`
   );
   const data = {
     results: res.data.results,

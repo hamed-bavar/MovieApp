@@ -24,7 +24,7 @@ const List = (props) => {
   useEffect(() => {
         (async () => {
           const res = await axios.get(
-            `${id}/${props.type}?api_key=c46e93100eb64667d419552d00b518d6&language=en-US`
+            `movie/${id}/${props.type}?api_key=c46e93100eb64667d419552d00b518d6&language=en-US`
           );
           let filteredData=null;
           if(props.type === "credits")

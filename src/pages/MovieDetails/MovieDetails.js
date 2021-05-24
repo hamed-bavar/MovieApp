@@ -17,7 +17,7 @@ const MovieDetails = () => {
     window.scrollTo(0, 0);
     (async () => {
       const res = await axios.get(
-        `${id}?api_key=c46e93100eb64667d419552d00b518d6&language=en-US`
+        `movie/${id}?api_key=c46e93100eb64667d419552d00b518d6&language=en-US`
       );
       setData(res.data);
     })();
@@ -92,8 +92,8 @@ const MovieDetails = () => {
             </Suspense>
             <Suspense fallback={<Spinner />}>
               <List type="similar" />
-            </Suspense>
-            <Suspense fallback={<Spinner />}>
+          </Suspense>
+           <Suspense fallback={<Spinner />}>
               <Gallery />
             </Suspense>
         </div>
