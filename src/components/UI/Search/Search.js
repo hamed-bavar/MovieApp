@@ -41,6 +41,7 @@ const Search = () => {
     reset();
     history.push(`/movie/${id}`)
   }
+  
   return (
     <div className="flex flex-col relative">
       <div className="flex items-center">

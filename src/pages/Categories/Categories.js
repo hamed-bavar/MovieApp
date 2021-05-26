@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Fragment } from "react";
+import { Fragment} from "react";
 import { useInfiniteQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -27,6 +27,7 @@ const Categories = () => {
     fetchMovies,
     { getNextPageParam: (lastPage) => lastPage.next }
   );
+
   const changeFilter = (event) => {
     history.push(`/${event.target.value}`);
   };

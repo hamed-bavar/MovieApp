@@ -73,7 +73,7 @@ const MovieDetails = () => {
                     ADD TO WATCH LIST
                   </button>
                   <p className="font-bold text-lg mb-5">{data.overview}</p>
-
+                  
                   <ShowList head="Genres" list={data.genres} />
                   <ShowList
                     head="Spoken Languages"
