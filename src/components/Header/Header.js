@@ -5,12 +5,17 @@ import { Link } from "react-router-dom";
 import { useAuthState ,useAuthActions} from "../../Context/Auth/authProvider";
 import watchListLogo from "../../assets/icons/watchList/icons8-list-64.png";
 import logoutLogo from "../../assets/icons/logoutIcon/icons8-logout-rounded-left-64.png";
+import {useHistory} from "react-router-dom"
 const Header = () => {
   const [Device] = useDevice();
   const { token } = useAuthState();
   const {setLogOut} = useAuthActions();
+  const history = useHistory();
   const logoutAcc = () =>{
     setLogOut();
+  }
+  const goToWatchListPage = ()=>{
+    history.push("/auth/watchlist")
   }
   return (
     <div className="h-24 sm:h-20 bg-purple-dark flex sm:flex-row flex-col justify-between items-center py-2 px-4 md:px-10 border-b-2 border-black z-50">
@@ -28,6 +33,7 @@ const Header = () => {
               src={watchListLogo}
               alt="watchListLogo"
               className="transform scale-50 -mr-4 cursor-pointer"
+              onClick={goToWatchListPage}
             ></img>
             <img
               src={logoutLogo}

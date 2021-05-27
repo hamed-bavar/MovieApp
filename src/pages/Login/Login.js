@@ -15,7 +15,8 @@ const Login = () => {
         history.push("/popular")
       }
   }, [token,history])
-  const doAuth = () => {
+  const doAuth = (e) => {
+    e.preventDefault();
     auth(email, password, !signUp);
   };
   const cleanErr = ()=>{
@@ -25,12 +26,12 @@ const Login = () => {
     history.push("/auth/Login");
   }
   return (
-    <div className="bg-gray-dark w-full h-screen flex justify-center items-center">
+    <form className="bg-gray-dark w-full min-h-screen flex justify-center items-center" onSubmit={doAuth}>
       {error && <p className="cursor-pointer" onClick={()=>cleanErr()}> {signUp ? "!ERROR... TRY AGAIN(use Stronger password or another Email":
       "!ERROR... TRY AGAIN(change email or password)"}</p>}
       {loading && <Spinner/>}
       {!error && !loading && (
-        <div className="w-[320px] sm:w-[450px] h-96 flex flex-col justify-items-start items-center p-6 relative bottom-10">
+        <div className="w-[320px] sm:w-[450px] h-96 flex flex-col justify-items-start items-center p-6 relative bottom-10 mt-8">
           <div className="bg-pink-600 rounded-full transform scale-50 p-2">
             <img
               src={authLogo}
@@ -54,7 +55,7 @@ const Login = () => {
             placeholder="Password"
           ></input>
           <button
-            onClick={doAuth}
+            type="submit"
             className="p-2 w-10/12 bg-blue-500 hover:bg-blue-600 h-10 mb-4"
           >
             {!signUp ? "Login" : "SignUp"}
@@ -69,7 +70,7 @@ const Login = () => {
         </div>
       )}
 
-    </div>
+    </form>
   );
 };
 

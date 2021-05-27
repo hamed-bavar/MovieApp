@@ -7,12 +7,17 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import LazyImage from "../../components/LazyImage/LazyImage";
 import classes from "./MovieDetails.module.css";
 import { lazy, Suspense } from "react";
+import {useAuthState} from "../../Context/Auth/authProvider"
+import {useWatchListActions} from "../../Context/watchList/watchListProvider"
 const List = lazy(() => import("../../components/List/List"));
 const Gallery = lazy(()=>import("../../components/Gallery/Gallery"))
 const MovieDetails = () => {
   const { id } = useParams();
   const history = useHistory();
   const [data, setData] = useState(undefined);
+  const {token} = useAuthState();
+  const [notifState, setNotifState] = useState(false)
+  const {add} = useWatchListActions();
   useEffect(() => {
     window.scrollTo(0, 0);
     (async () => {
@@ -22,10 +27,26 @@ const MovieDetails = () => {
       setData(res.data);
     })();
   }, [id]);
-
   const goBack = () => {
     history.goBack();
   };
+  const goLogin = ()=>{
+    history.push("/auth/login")
+  }
+  const setToWatchList = () =>{
+    const item = {
+      id:data.id,
+      release_date:data.release_date,
+      imageUrl:`https://image.tmdb.org/t/p/w300/${data.poster_path}`,
+      alt:data.original_title,
+      rate:data.vote_average
+    }
+    add(item);
+    setNotifState(true)
+    setTimeout(()=>{
+      setNotifState(false)
+    },3000)
+  }
   return (
     <>
       {!data && (
@@ -34,7 +55,10 @@ const MovieDetails = () => {
         </div>
       )}
       {data && (
-        <div className={`bg-gray-dark min-h-screen ${classes.hide}`}>
+        <div className={`bg-gray-dark min-h-screen relative ${classes.hide}`}>
+          {notifState && <div className="bg-gradient-to-r from-green-400 to-blue-500 text-xl h-12 w-52 fixed bottom-1 border-2  right-1 z-50 flex justify-center items-center rounded-lg shadow-lg transition-all duration-700">
+            Added
+          </div>}
           <div className="bg-gray-dark w-full min-h-screen grid grid-cols-8 relative">
             <div
               className="absolute top-0 left-0 filter blur-sm w-full h-full bg-cover"
@@ -67,11 +91,20 @@ const MovieDetails = () => {
                 </div>
 
                 <div className="flex flex-col justify-items-start mt-4 items-center px-2 relative">
-                  <button
+                  {!token ? <button
                     className={`cursor-not-allowed ${classes.watchListBtn}`}
+                    onClick={goLogin}
+                  >
+                    ADD TO WATCH LIST
+                  </button>:<button
+                    className={`${classes.watchListBtn}`}
+                    onClick={setToWatchList}
                   >
                     ADD TO WATCH LIST
                   </button>
+                  
+                }
+                  
                   <p className="font-bold text-lg mb-5">{data.overview}</p>
                   
                   <ShowList head="Genres" list={data.genres} />

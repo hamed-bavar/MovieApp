@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AuthProvider from "./Context/Auth/authProvider";
+import WatchListProvider from "./Context/watchList/watchListProvider";
 import axios from "axios";
 axios.defaults.baseURL = "https://api.themoviedb.org/3/";
 export const axiosIns = axios.create({
@@ -14,9 +15,11 @@ export const axiosIns = axios.create({
 
 ReactDOM.render(
   <AuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <WatchListProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </WatchListProvider>
   </AuthProvider>,
   document.getElementById("root")
 );

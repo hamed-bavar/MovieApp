@@ -77,6 +77,7 @@ const Categories = () => {
                       imageUrl={`https://image.tmdb.org/t/p/w300/${item.poster_path}`}
                       alt={item.original_title}
                       rate={item.vote_average}
+                      watch={false}
                     ></Card>
                 ))}
               </Fragment>
