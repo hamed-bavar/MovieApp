@@ -44,11 +44,12 @@ const Header = () => {
           </div>
         )}
         {Device !== "Mobile" && (
-          <button
+          <a
             className={`${classes.btn} border-2 border-purple-light  mr-2`}
+            href="https://github.com/hamed-bavar/MovieApp"
           >
             GitHub
-          </button>
+          </a>
         )}
       </div>
       {Device === "Desktop" && (

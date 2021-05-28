@@ -1,9 +1,15 @@
 import { useWatchListState } from "../../Context/watchList/watchListProvider";
 import Card from "../../components/Card/Card";
 import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuthState } from "../../Context/Auth/authProvider";
 const WatchList = () => {
   const watchList = useWatchListState();
   const history = useHistory();
+  const { token } = useAuthState();
+  useEffect(() => {
+    if (!token) history.push("/popular");
+  }, [token,history]);
   return (
     <div className="bg-gray-dark min-h-screen grid py-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-6 justify-items-center relative">
       {watchList.map((item) => {
