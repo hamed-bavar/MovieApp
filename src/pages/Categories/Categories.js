@@ -29,14 +29,13 @@ const Categories = () => {
   );
 
   const changeFilter = (event) => {
-    history.push(`/${event.target.value}`);
+    history.push(`/see/${event.target.value}`);
   };
   const scrollto = () =>{
       window.scrollTo({top: 0, behavior: 'smooth'});
   }
   return (
     <div
-      onChange={changeFilter}
       className="bg-gray-dark w-full min-h-screen flex flex-col justify-center"
     >
       <button className="transform -rotate-90 fixed bottom-2 left-4 z-10 rounded-full w-10 h-10  bg-white text-black" onClick={scrollto}><img alt="ScrollToTop" src={scrollToTop}></img></button>
@@ -48,6 +47,7 @@ const Categories = () => {
       )}
       {data && (
         <select
+          onChange={changeFilter}
           defaultValue={params.category}
           className="w-44 h-8 ml-8 mt-2 text-white  bg-purple-dark border-2 border-purple-light rounded-md focus:outline-none"
           name="categoties"

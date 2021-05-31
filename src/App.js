@@ -2,27 +2,23 @@ import Header from "./components/Header/Header";
 import Categories from "./pages/Categories/Categories";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Route, Switch} from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import { useAuthState, useAuthActions } from "./Context/Auth/authProvider";
 import { useWatchListActions } from "./Context/watchList/watchListProvider";
 import { useEffect, useRef } from "react";
-import {useHistory,useLocation} from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom";
 import WatchList from "./pages/WatchList/WatchList";
 const queryClient = new QueryClient();
 const App = () => {
   const { token } = useAuthState();
   const { authCheck } = useAuthActions();
-  const isAuthChecked = useRef(false);
   const isWatchListChecked = useRef(false);
   const history = useHistory();
   const location = useLocation();
   const { setWatchListFromStorage } = useWatchListActions();
   useEffect(() => {
-    if (!isAuthChecked.current) {
-      authCheck();
-    }
-    isAuthChecked.current = true;
+    authCheck();
   }, [authCheck]);
   useEffect(() => {
     if (token) {
@@ -32,10 +28,9 @@ const App = () => {
       isWatchListChecked.current = true;
     }
   }, [token, setWatchListFromStorage]);
-  useEffect(()=>{
-    if(location.pathname === "/" || (!token && isWatchListChecked.current && location.pathname==="/auth/watchlist"))
-      history.push("/popular")
-  },[location,history,token])
+  useEffect(() => {
+    if (location.pathname === "/") history.push("/popular");
+  }, [location, history, token]);
   return (
     <>
       <Header />
@@ -49,12 +44,13 @@ const App = () => {
               <WatchList />
             </Route>
           )}
-          <Route exact path="/:category">
+          <Route exact path="/see/:category">
             <Categories />
           </Route>
           <Route exact path="/movie/:id">
             <MovieDetails />
           </Route>
+          <Redirect to="/see/popular"></Redirect>
         </Switch>
       </QueryClientProvider>
     </>

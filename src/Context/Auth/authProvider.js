@@ -1,97 +1,111 @@
 import React from "react";
 import { axiosIns } from "../../index";
+import createPersistedReducer from "use-persisted-reducer";
+const usePersistedReducer = createPersistedReducer("authState");
 const authContext = React.createContext();
-const authContextSet = React.createContext();
-
+const authContextDispatch = React.createContext();
+const initialState = {
+  token: null,
+  loading: null,
+  error: null,
+};
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "load":
+      return { ...state, loading: true };
+    case "logout":
+      return {
+        ...state,
+        loading: null,
+        token: null,
+        error: null,
+        expire: null,
+      };
+    case "success":
+      return {
+        ...state,
+        loading: null,
+        token: action.payload.token,
+        expire: action.payload.expire,
+      };
+    case "fail":
+      return { ...state, error: true,loading:null,token:null,expire:null};
+    default:
+      throw new Error();
+  }
+};
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = React.useState({
-    token: null,
-    loading: null,
-    error: null,
-  });
+  const [auth, dispatch] = usePersistedReducer(reducer, initialState);
   return (
     <authContext.Provider value={auth}>
-      <authContextSet.Provider value={setAuth}>
+      <authContextDispatch.Provider value={dispatch}>
         {children}
-      </authContextSet.Provider>
+      </authContextDispatch.Provider>
     </authContext.Provider>
   );
 };
-
 const useAuthState = () => {
   return React.useContext(authContext);
 };
-const useAuthSetState = () => {
-  return React.useContext(authContextSet);
+const useAuthDispatch = () => {
+  return React.useContext(authContextDispatch);
 };
-
 const useAuthActions = () => {
-  const setAuthState = useAuthSetState();
+  const authDispatch = useAuthDispatch();
   const authState = useAuthState();
-
-  const setLoading = () => {
-    setAuthState({ ...authState, error: null, loading: true });
-  };
-  const setSuccess = (token) => {
-    setAuthState({ ...authState, error: null, loading: null, token: token });
-  };
-  const setFail = () => {
-    setAuthState({ ...authState, error: true, loading: null, token: null });
-  };
-  const setLogOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
-    setAuthState({ ...authState, error: null, loading: null, token: null });
-  };
-  const reset = () => {
-    setAuthState({ ...authState, error: null, loading: null, token: null });
-  };
-  const checkAuthTimeOut = (exp) => {
-    setTimeout(setLogOut, exp * 1000);
-  };
-  const authCheck = () => {
+  const checkAuthTimeOut = React.useCallback((exp) =>{
+    setTimeout(()=>{authDispatch({type:'logout'})},exp*1000);
+  },[authDispatch])
+  const authCheck = React.useCallback(() => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setLogOut();
-        return;
-      }
-      const expir = localStorage.getItem("expiration");
-      if (expir < new Date()) {
-        setLogOut();
+      const token = authState.token;
+      if (token) {
+        const expir = authState.expire;
+        if (expir < new Date()) {
+          authDispatch({ type: "logout" });
+        } else {
+          authDispatch({
+            type: "success",
+            payload: { token: token, expire: authState.expire },
+          });
+          const exp = (new Date(expir).getTime() - new Date().getTime()) / 1000;
+          checkAuthTimeOut(exp);
+        }
       } else {
-        setSuccess(token);
-        const exp = (new Date(expir).getTime() - new Date().getTime()) / 1000;
-        checkAuthTimeOut(exp);
+        authDispatch({ type: "logout" });
       }
-    } catch (e) {}
-  };
+    } catch (e) {
+      authDispatch({ type: "error" });
+    }
+  }, [authDispatch, authState.expire, authState.token, checkAuthTimeOut]);
   const auth = async (email, password, isSignIn) => {
-    setLoading();
+    authDispatch({ type: "load" });
     let url = null;
     if (isSignIn)
       url =
         "accounts:signInWithPassword?key=AIzaSyCbdDOVj3453l2QaShTZUT7NhRE_RXu6EI";
     else url = "accounts:signUp?key=AIzaSyCbdDOVj3453l2QaShTZUT7NhRE_RXu6EI";
     try {
-      const response = await axiosIns.post(url, {
+      const { data } = await axiosIns.post(url, {
         email: email,
         password: password,
         returnSecureToken: true,
       });
-      setSuccess(response.data.idToken);
       let expiration = new Date(
-        new Date().getTime() + parseInt(response.data.expiresIn * 1000)
+        new Date().getTime() + parseInt(data.expiresIn * 1000)
       );
-      checkAuthTimeOut(response.data.expiresIn);
-      localStorage.setItem("token", response.data.idToken);
-      localStorage.setItem("expiration", expiration);
+      let token = data.idToken;
+      authDispatch({
+        type: "success",
+        payload: { token: token, expire: expiration },
+      });
+      checkAuthTimeOut(data.expiresIn);
     } catch (e) {
-      setFail();
+      authDispatch({ type: "fail" });
     }
   };
-  return { setLoading, setSuccess, setFail, setLogOut, auth, authCheck, reset };
+  return { auth, authCheck };
 };
 
-export { useAuthSetState, useAuthState, useAuthActions };
+export { useAuthState, useAuthActions,useAuthDispatch};
 export default AuthProvider;

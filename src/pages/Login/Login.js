@@ -1,35 +1,47 @@
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import authLogo from "../../assets/icons/authLogo/icons8-lock-52 (1).png";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import { useAuthActions, useAuthState } from "../../Context/Auth/authProvider";
-import {useHistory} from 'react-router-dom'
+import {
+  useAuthActions,
+  useAuthState,
+  useAuthDispatch,
+} from "../../Context/Auth/authProvider";
+import { useHistory } from "react-router-dom";
 const Login = () => {
   const history = useHistory();
-  const { auth,reset } = useAuthActions();
-  const { error, loading ,token} = useAuthState();
+  const { auth } = useAuthActions();
+  const { error, loading, token } = useAuthState();
+  const dispathAuth = useAuthDispatch();
   const [signUp, setSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  useEffect(() => {
-      if(token){
-        history.push("/popular")
-      }
-  }, [token,history])
   const doAuth = (e) => {
     e.preventDefault();
     auth(email, password, !signUp);
   };
-  const cleanErr = ()=>{
-    reset();
+  useEffect(() => {
+    if (token) history.goBack();
+  }, [token, history]);
+  const cleanErr = () => {
+    dispathAuth({ type: "logout" });
     setEmail("");
     setPassword("");
     history.push("/auth/Login");
-  }
+  };
   return (
-    <form className="bg-gray-dark w-full min-h-screen flex justify-center items-center" onSubmit={doAuth}>
-      {error && <p className="cursor-pointer" onClick={()=>cleanErr()}> {signUp ? "!ERROR... TRY AGAIN(use Stronger password or another Email":
-      "!ERROR... TRY AGAIN(change email or password)"}</p>}
-      {loading && <Spinner/>}
+    <form
+      className="bg-gray-dark w-full min-h-screen flex justify-center items-center"
+      onSubmit={doAuth}
+    >
+      {error && (
+        <p className="cursor-pointer" onClick={() => cleanErr()}>
+          {" "}
+          {signUp
+            ? "!ERROR... TRY AGAIN(use Stronger password or another Email"
+            : "!ERROR... TRY AGAIN(change email or password)"}
+        </p>
+      )}
+      {loading && <Spinner />}
       {!error && !loading && (
         <div className="w-[320px] sm:w-[450px] h-96 flex flex-col justify-items-start items-center p-6 relative bottom-10 mt-8">
           <div className="bg-pink-600 rounded-full transform scale-50 p-2">
@@ -69,7 +81,6 @@ const Login = () => {
           <p>Copyright &copy;2021-hamedBavar</p>
         </div>
       )}
-
     </form>
   );
 };

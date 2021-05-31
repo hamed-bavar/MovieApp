@@ -8,7 +8,7 @@ const WatchList = () => {
   const history = useHistory();
   const { token } = useAuthState();
   useEffect(() => {
-    if (!token) history.push("/popular");
+    if (!token) history.push("/see/popular");
   }, [token,history]);
   return (
     <div className="bg-gray-dark min-h-screen grid py-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-6 justify-items-center relative">
@@ -28,7 +28,7 @@ const WatchList = () => {
       {watchList.length === 0 && (
         <p
           className="text-red-700 font-bold cursor-pointer text-lg ml-4"
-          onClick={() => history.push("/popular")}
+          onClick={() => history.push("/see/popular")}
         >
           watchlist is Empty. click here to explore movies
         </p>

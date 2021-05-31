@@ -2,17 +2,17 @@ import classes from "./Header.module.css";
 import Search from "./../UI/Search/Search";
 import useDevice from "../../hooks/useDevice";
 import { Link } from "react-router-dom";
-import { useAuthState ,useAuthActions} from "../../Context/Auth/authProvider";
+import { useAuthState ,useAuthDispatch} from "../../Context/Auth/authProvider";
 import watchListLogo from "../../assets/icons/watchList/icons8-list-64.png";
 import logoutLogo from "../../assets/icons/logoutIcon/icons8-logout-rounded-left-64.png";
 import {useHistory} from "react-router-dom"
 const Header = () => {
   const [Device] = useDevice();
   const { token } = useAuthState();
-  const {setLogOut} = useAuthActions();
+  const authDispatch = useAuthDispatch();
   const history = useHistory();
   const logoutAcc = () =>{
-    setLogOut();
+    authDispatch({type:"logout"});
   }
   const goToWatchListPage = ()=>{
     history.push("/auth/watchlist")
