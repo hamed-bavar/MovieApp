@@ -17,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const doAuth = (e) => {
     e.preventDefault();
+    console.log("form handler")
     auth(email, password, !signUp);
   };
   useEffect(() => {
@@ -32,6 +33,7 @@ const Login = () => {
     <form
       className="bg-gray-dark w-full min-h-screen flex justify-center items-center"
       onSubmit={doAuth}
+      autoComplete="on"
     >
       {error && (
         <p className="cursor-pointer" onClick={() => cleanErr()}>
