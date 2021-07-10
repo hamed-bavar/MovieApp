@@ -11,4 +11,6 @@
  * create account to build watchList
  * to view movie details (like casts)
  * to view similiar movies
-  **link**:https://musing-yalow-9dee07.netlify.app/see/popular
+
+  **link**
+  https://musing-yalow-9dee07.netlify.app/see/popular
