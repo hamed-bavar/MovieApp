@@ -1,9 +1,9 @@
 # MovieApp Technologies 
 * react js
 * tailwind css and css modules
-* react query (for cache)
+* react query (cache)
 * react context api
-* firebase (for auth)
+* firebase (auth)
 
 **Application allowes**
  * to search movies
