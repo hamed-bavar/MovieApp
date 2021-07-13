@@ -29,7 +29,7 @@ const App = () => {
     }
   }, [token, setWatchListFromStorage]);
   useEffect(() => {
-    if (location.pathname === "/") history.push("/popular");
+    if (location.pathname === "/") history.push("/see/popular");
   }, [location, history, token]);
   return (
     <>
