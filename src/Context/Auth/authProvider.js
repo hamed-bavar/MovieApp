@@ -8,6 +8,7 @@ const initialState = {
   token: null,
   loading: null,
   error: null,
+  expire: null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -27,9 +28,10 @@ const reducer = (state, action) => {
         loading: null,
         token: action.payload.token,
         expire: action.payload.expire,
+        error: null,
       };
     case "fail":
-      return { ...state, error: true,loading:null,token:null,expire:null};
+      return { ...state, error: true, loading: null, token: null, expire: null };
     default:
       throw new Error();
   }
@@ -38,9 +40,7 @@ const AuthProvider = ({ children }) => {
   const [auth, dispatch] = usePersistedReducer(reducer, initialState);
   return (
     <authContext.Provider value={auth}>
-      <authContextDispatch.Provider value={dispatch}>
-        {children}
-      </authContextDispatch.Provider>
+      <authContextDispatch.Provider value={dispatch}>{children}</authContextDispatch.Provider>
     </authContext.Provider>
   );
 };
@@ -53,9 +53,14 @@ const useAuthDispatch = () => {
 const useAuthActions = () => {
   const authDispatch = useAuthDispatch();
   const authState = useAuthState();
-  const checkAuthTimeOut = React.useCallback((exp) =>{
-    setTimeout(()=>{authDispatch({type:'logout'})},exp*1000);
-  },[authDispatch])
+  const checkAuthTimeOut = React.useCallback(
+    (exp) => {
+      setTimeout(() => {
+        authDispatch({ type: "logout" });
+      }, exp * 1000);
+    },
+    [authDispatch]
+  );
   const authCheck = React.useCallback(() => {
     try {
       const token = authState.token;
@@ -81,9 +86,7 @@ const useAuthActions = () => {
   const auth = async (email, password, isSignIn) => {
     authDispatch({ type: "load" });
     let url = null;
-    if (isSignIn)
-      url =
-        "accounts:signInWithPassword?key=AIzaSyCbdDOVj3453l2QaShTZUT7NhRE_RXu6EI";
+    if (isSignIn) url = "accounts:signInWithPassword?key=AIzaSyCbdDOVj3453l2QaShTZUT7NhRE_RXu6EI";
     else url = "accounts:signUp?key=AIzaSyCbdDOVj3453l2QaShTZUT7NhRE_RXu6EI";
     try {
       const { data } = await axiosIns.post(url, {
@@ -91,9 +94,7 @@ const useAuthActions = () => {
         password: password,
         returnSecureToken: true,
       });
-      let expiration = new Date(
-        new Date().getTime() + parseInt(data.expiresIn * 1000)
-      );
+      let expiration = new Date(new Date().getTime() + parseInt(data.expiresIn * 1000));
       let token = data.idToken;
       authDispatch({
         type: "success",
@@ -107,5 +108,5 @@ const useAuthActions = () => {
   return { auth, authCheck };
 };
 
-export { useAuthState, useAuthActions,useAuthDispatch};
+export { useAuthState, useAuthActions, useAuthDispatch };
 export default AuthProvider;

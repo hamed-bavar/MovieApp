@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import authLogo from "../../assets/icons/authLogo/icons8-lock-52 (1).png";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import {
-  useAuthActions,
-  useAuthState,
-  useAuthDispatch,
-} from "../../Context/Auth/authProvider";
+import { useAuthActions, useAuthState, useAuthDispatch } from "../../Context/Auth/authProvider";
 import { useHistory } from "react-router-dom";
 const Login = () => {
   const history = useHistory();
@@ -17,7 +13,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const doAuth = (e) => {
     e.preventDefault();
-    console.log("form handler")
     auth(email, password, !signUp);
   };
   useEffect(() => {
@@ -27,7 +22,6 @@ const Login = () => {
     dispathAuth({ type: "logout" });
     setEmail("");
     setPassword("");
-    history.push("/auth/Login");
   };
   return (
     <form
@@ -47,11 +41,7 @@ const Login = () => {
       {!error && !loading && (
         <div className="w-[320px] sm:w-[450px] h-96 flex flex-col justify-items-start items-center p-6 relative bottom-10 mt-8">
           <div className="bg-pink-600 rounded-full transform scale-50 p-2">
-            <img
-              src={authLogo}
-              alt="authLogo"
-              className="transform scale-75"
-            ></img>
+            <img src={authLogo} alt="authLogo" className="transform scale-75"></img>
           </div>
           <p className="-mt-4 mb-4 italic text-lg text-gray-light">
             {!signUp ? "Login" : "SignUp"}
@@ -68,10 +58,7 @@ const Login = () => {
             className="p-2 w-10/12 bg-gray-dark border-[1px] border-white mb-6 rounded-sm"
             placeholder="Password"
           ></input>
-          <button
-            type="submit"
-            className="p-2 w-10/12 bg-blue-500 hover:bg-blue-600 h-10 mb-4"
-          >
+          <button type="submit" className="p-2 w-10/12 bg-blue-500 hover:bg-blue-600 h-10 mb-4">
             {!signUp ? "Login" : "SignUp"}
           </button>
           <p
