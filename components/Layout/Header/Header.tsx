@@ -10,6 +10,9 @@ const Header: React.FC = () => {
   const goToWatchlist = () => {
     router.push("/WatchList");
   };
+  const goToMainPage = () => {
+    router.push("/popular/1");
+  };
   return (
     <div className={classes.header}>
       <nav className={classes.container}>
@@ -26,7 +29,9 @@ const Header: React.FC = () => {
           </div>
           <div>
             {device && device.width >= 770 && (
-              <div className={classes.title}>{consts.HEADER_TITLE}</div>
+              <div className={classes.title} onClick={goToMainPage}>
+                {consts.HEADER_TITLE}
+              </div>
             )}
           </div>
           <Search />
