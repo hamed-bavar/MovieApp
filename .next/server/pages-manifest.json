@@ -1,0 +1,10 @@
+{
+  "/Movie/[id]": "pages/Movie/[id].js",
+  "/WatchList": "pages/WatchList.html",
+  "/[category]/[page]": "pages/[category]/[page].js",
+  "/_app": "pages/_app.js",
+  "/": "pages/index.html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
+}
