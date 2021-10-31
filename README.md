@@ -1,16 +1,16 @@
-# MovieApp Technologies 
+# MovieApp Technologies (main version is in the rebuild/next branch)
 * react js
-* tailwind css and css modules
-* react query (cache)
+* next js
+* sass modules
 * react context api
-* firebase (auth)
+* typescript
 
 **Application allowes**
  * to search movies
  * to filter movies
- * create account to build watchList
+ * to use watchlist
  * to view movie details (like casts)
- * to view similiar movies
 
   **link**
-  https://musing-yalow-9dee07.netlify.app/see/popular
+  
+  
