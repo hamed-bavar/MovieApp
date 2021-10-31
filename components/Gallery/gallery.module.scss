@@ -1,0 +1,20 @@
+.gallery {
+  width: 85vw;
+  margin: 3rem auto;
+  padding-bottom: 3rem;
+
+  div {
+    width: 100%;
+    .img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.headGallery {
+  margin: 3rem;
+  color: yellow;
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}

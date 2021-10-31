@@ -1,0 +1,88 @@
+@import "../../../styles/variables.scss";
+.header > * {
+  transition: all 0.5s ease-in-out;
+}
+.header {
+  background: $purple1;
+  .container {
+    padding: 0.6rem 0;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    header {
+      padding: 0.5rem 0.8rem;
+      @include for-tablet {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .group {
+        text-align: center;
+      }
+      .title {
+        color: $myYello;
+        font-weight: 800;
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 1.4rem;
+      }
+    }
+
+    .btn {
+      padding: 0.5rem 2rem;
+      border-radius: 20px;
+      background: $purple1;
+      border: 2px solid $pupleLight1;
+      color: white;
+      font-weight: bolder;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 0 0.3rem;
+      &:hover {
+        border-color: $white;
+      }
+    }
+    .searchBar {
+      border: 2px solid $pupleLight1;
+      width: 90%;
+      max-width: 20rem;
+      margin: 0.5rem auto;
+      text-align: left;
+      @include for-tablet {
+        margin: 0;
+      }
+      padding: 0.4rem 0.8rem;
+      border: 2px solid $pupleLight1;
+      border-radius: 20px;
+      cursor: pointer;
+      &:hover {
+        border-color: $white;
+        cursor: pointer;
+      }
+      input {
+        width: 100%;
+        border: none;
+        text-align: left;
+        &:focus::placeholder {
+          color: transparent;
+          transition: all 0.8s ease-in-out;
+        }
+
+        &::placeholder {
+          color: $myGray;
+          background: $purple1;
+          font-size: 0.9rem;
+        }
+        &:focus {
+          outline: none;
+          color: $myGray;
+          background: $purple1;
+          font-size: 0.9rem;
+        }
+        &:focus input::placeholder {
+          color: black;
+        }
+      }
+    }
+  }
+}

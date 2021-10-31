@@ -1,0 +1,121 @@
+@import "../../styles/variables.scss";
+.movieDetailWrapper {
+  width: 100%;
+  position: relative;
+  padding: 0.5rem;
+  z-index: 0;
+  min-height: 100vh;
+  background-size: cover;
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    filter: blur(2px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  section {
+    border-radius: 10px;
+    z-index: 1;
+    margin: 1rem;
+    // background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 100%;
+    max-width: 1400px;
+    margin: 4rem auto;
+    overflow: auto;
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    /* this will hide the scrollbar in internet explorers */
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      display: none;
+    }
+    @include for-tablet {
+      display: flex;
+    }
+    .imgWrapper {
+      .img {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+      @include for-tablet {
+        width: 500px;
+        height: 528px;
+      }
+    }
+    .textWrapper {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-top-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+      }
+      height: 528px;
+      position: relative;
+      @include for-tablet {
+        width: calc(100% - 400px);
+        overflow-y: auto;
+      }
+    }
+    .head {
+      text-align: center;
+      color: yellow;
+      padding: 0.5rem 0;
+      font-weight: 600;
+      padding-bottom: 0.5rem;
+      font-size: 2rem;
+      margin: 0 auto;
+      display: block;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    button {
+      display: block;
+      background: $darkGray;
+      padding: 0.5rem 1.5rem;
+      color: white;
+      font-size: 1rem;
+      border: 2px solid red;
+      text-transform: uppercase;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 1rem auto;
+      &:hover {
+        border-color: $pupleLight1;
+      }
+    }
+    .overview {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      padding-left: 1rem;
+    }
+    .header {
+      color: yellow;
+      background: $darkGray;
+      display: inline-block;
+      padding: 0.5rem;
+      border-radius: 10px;
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+    .listItems {
+      margin: 0.5rem 0.5rem;
+      padding-left: 1rem;
+      & > * {
+        background: $darkGray;
+        display: inline-block;
+        padding: 0.5rem;
+        border-radius: 10px;
+        margin: 3px;
+      }
+    }
+  }
+}

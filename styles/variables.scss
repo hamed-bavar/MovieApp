@@ -1,0 +1,30 @@
+$darkGray: #161a1a;
+$purple1: #2d283e;
+$pupleLight1: #802bb1;
+$white: #fff;
+$myYello: #fcd34d;
+$myOrange: #d97706;
+$myGray: #e5e5e5;
+
+@mixin for-tablet-one {
+  @media (min-width: 650px) {
+    @content;
+  }
+}
+
+@mixin for-tablet {
+  @media (min-width: 770px) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin for-desktop-large {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}

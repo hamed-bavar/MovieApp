@@ -1,0 +1,82 @@
+@import "../../../styles/variables.scss";
+.searchBar {
+  border: 2px solid $pupleLight1;
+  width: 90%;
+  max-width: 20rem;
+  margin: 0.5rem auto;
+  color: white;
+  text-align: left;
+  .resultContainer {
+    height: 300px;
+    width: 310px;
+    z-index: 20;
+    position: absolute;
+    margin-top: 0.6rem;
+    margin-left: 2rem;
+    overflow: auto;
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    /* this will hide the scrollbar in internet explorers */
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      display: none;
+    }
+    border-radius: 8px;
+    padding: 0.5rem;
+    background: $purple1;
+    color: white;
+    border: 1px solid $pupleLight1;
+    .item {
+      border-bottom: 1px solid white;
+      padding: 0.2rem;
+      &:hover {
+        background: $pupleLight1;
+      }
+    }
+  }
+
+  @include for-tablet {
+    margin: 0;
+  }
+  padding: 0.4rem 0.8rem;
+  border: 2px solid $pupleLight1;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
+  input {
+    width: 100%;
+    border: none;
+    color: white;
+
+    text-align: left;
+    background: transparent;
+    &:focus::placeholder {
+      color: transparent;
+      transition: all 0.8s ease-in-out;
+    }
+
+    &::placeholder {
+      color: $myGray;
+      background: $purple1;
+      font-size: 0.9rem;
+    }
+    &:focus {
+      outline: none;
+      color: $myGray;
+      background: $purple1;
+      font-size: 0.9rem;
+    }
+    &:focus input::placeholder {
+      color: black;
+      background: transparent;
+    }
+    &:not(:focus) input::placeholder {
+      color: black;
+      background: transparent;
+    }
+  }
+}

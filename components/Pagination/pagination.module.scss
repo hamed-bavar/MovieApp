@@ -1,0 +1,37 @@
+@import "../../styles/variables.scss";
+.list {
+  color: white;
+  font-weight: 900px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+
+  .btn {
+    transform: scale(1.2);
+    background: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    margin: 0.2rem;
+  }
+  .activeItem {
+    background-color: $pupleLight1 !important;
+  }
+  .listWrapper {
+    margin: 1rem;
+  }
+  .item {
+    border: 2px solid $pupleLight1;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    background: $darkGray;
+    color: white;
+    font-weight: 600;
+    &:hover {
+      border: 2px solid white;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "../../styles/variables.scss";
+.sliderContainer {
+  width: 80vw;
+  margin: 0 auto;
+}
+.path {
+  color: $pupleLight1;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin: 3rem;
+}
+.sliderItem {
+  p {
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    color: rgb(196, 210, 240);
+    font-weight: bold;
+  }
+  .name {
+    border-bottom: 2px solid yellow;
+    border-radius: 8px;
+  }
+}
