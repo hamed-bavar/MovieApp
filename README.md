@@ -32,3 +32,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# MovieApp Technologies (main version is in the rebuild/next branch)
+* react js
+* next js
+* sass modules
+* react context api
+* typescript
+
+Application allowes
+ * to search movies
+ * to filter movies
+ * to use watchlist
+ * to view movie details (like casts)
