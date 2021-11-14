@@ -12,25 +12,25 @@ class MovieService {
   }
   async getMovieById(id: string) {
     const response = await axios.get<MovieDetails>(
-      `https://movie-galaxy-proxy.herokuapp.com/moviebyid/${id}`
+      `https://rev-proxy-movie.herokuapp.com/moviebyid/${id}`
     );
     return response.data;
   }
   async getCredits(id: string) {
     const response = await axios.get<Credits>(
-      `https://movie-galaxy-proxy.herokuapp.com/getCredits/${id}`
+      `https://rev-proxy-movie.herokuapp.com/getCredits/${id}`
     );
     return response.data;
   }
   async getMovieGallery(id: string) {
     const response = await axios.get<Gallery>(
-      `https://movie-galaxy-proxy.herokuapp.com/getMovieGallery/${id}`
+      `https://rev-proxy-movie.herokuapp.com/getMovieGallery/${id}`
     );
     return response.data;
   }
   async searchByName(searchText: string) {
     const response = await axios.get<SearchResults>(
-      `https://movie-galaxy-proxy.herokuapp.com/searchByText/${searchText}`
+      `https://rev-proxy-movie.herokuapp.com/searchByText/${searchText}`
     );
     return response.data;
   }
