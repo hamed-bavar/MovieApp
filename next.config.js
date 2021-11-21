@@ -20,7 +20,7 @@ const withImages = require("next-images");
 
 module.exports = {
   images: {
-    domains: ["image.tmdb.org", "localhost", "movie-galaxy-proxy.herokuapp.com"],
+    domains: ["image.tmdb.org", "localhost", "reverse-proxy-movie-app.herokuapp.com"],
   },
   async redirects() {
     return [
