@@ -14,7 +14,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const { remove } = useWatchList();
   const router = useRouter();
-  const srcImage = `https://reverse-proxy-movie-app.herokuapp.com//movies/image${poster_path}/300`;
+  const srcImage = `https://reverse-proxy-movie-app.herokuapp.com/movies/image${poster_path}/300`;
   const changePage = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     router.push(`/Movie/${id}`);

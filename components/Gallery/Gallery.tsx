@@ -22,7 +22,7 @@ const Gallery: React.FC<{ id: string }> = ({ id }) => {
         {data?.backdrops.map((item) => (
           <div key={item.file_path}>
             <img
-              src={`https://reverse-proxy-movie-app.herokuapp.com//movies/gallery${item.file_path}`}
+              src={`https://reverse-proxy-movie-app.herokuapp.com/movies/gallery${item.file_path}`}
               width={"100%"}
               height={"100%"}
               className={classes.img}
