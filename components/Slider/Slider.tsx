@@ -35,7 +35,7 @@ const Slider: React.FC<{ id: string }> = ({ id }) => {
           data.cast.map((item) => (
             <div key={item.id} className={classes.sliderItem}>
               <Image
-                src={`https://reverse-proxy-movie-app.herokuapp.com/movies/image${item.profile_path}/500`}
+                src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
                 layout="responsive"
                 width={"100%"}
                 height={"100%"}

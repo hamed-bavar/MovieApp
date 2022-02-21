@@ -35,12 +35,12 @@ const ShowDetails: React.FC<ShowDetailsProps> = ({
         <div
           className={classes.bg}
           style={{
-            backgroundImage: `url(https://reverse-proxy-movie-app.herokuapp.com/movies/image${backdrop_path}/1280)`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/w1280/${backdrop_path})`,
           }}
         ></div>
         <div className={classes.imgWrapper}>
           <Image
-            src={`https://reverse-proxy-movie-app.herokuapp.com/movies/image${poster_path}/400`}
+            src={`https://image.tmdb.org/t/p/w400/${poster_path}`}
             width="100%"
             height="100%"
             layout="responsive"
